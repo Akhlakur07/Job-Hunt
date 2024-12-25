@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Register as Job Seeker{% endblock %}
+{% block content %}
+<h2>Register as Job Seeker</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ seeker_form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
+

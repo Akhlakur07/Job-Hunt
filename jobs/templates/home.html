@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Hunt</title>
-  {%load static%}
-  <link rel="stylesheet" href="{% static 'home.css'%}">
-</head>
-<body>
-  <header class="navbar">
-    <div class="logo">
-      <h1>Job Hunt</h1>
-      <p>Get your dream job</p>
-    </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Register</a>
-      <a href="#">Login</a>
-    </nav>
-  </header>
+{% extends 'base.html' %}
 
-  <main class="hero">
-    <h1>Find the most exciting startup jobs</h1>
-    <form class="search-bar">
-      <input type="text" placeholder="Job Title or keyword" />
-      <select>
-        <option value="">All</option>
-      </select>
-      <button type="submit">Find Job</button>
-    </form>
-  </main>
-</body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Welcome to Job Hunt!</h2>
+
+<p>Hello, {{ user.username }}! You are logged in as a {{ user_type }}.</p>
+
+{% if user_type == "Job Seeker" %}
+    <a href="#">View Available Jobs</a>
+    <a href="#">Edit Profile</a>
+{% elif user_type == "Company" %}
+    <a href="#">Post a New Job</a>
+    <a href="#">Edit Profile</a>
+{% endif %}
+
+<!-- Logout Button -->
+<form action="{% url 'logout' %}" method="post" style="margin-top: 20px;">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+{% endblock %}

@@ -1,6 +1,10 @@
 from django.db import models
 
 class user(models.Model):
+    USER_TYPE = [
+        ('job_seeker', 'Job Seeker'),
+        ('company', 'Company')
+    ]
     username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=100, unique=True)
     address = models.CharField(max_length=300, null=True, blank=True)
