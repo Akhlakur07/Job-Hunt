@@ -1,5 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'jobs/base.html' %}
 {% block title %}Register as Job Seeker{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'jobs/register.css' %}">
+{% endblock %}
+
 {% block content %}
 <h2>Register as Job Seeker</h2>
 <form method="post" enctype="multipart/form-data">

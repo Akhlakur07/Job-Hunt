@@ -1,22 +1,24 @@
 from django.db import models
 
 class user(models.Model):
-    USER_TYPE = [
-        ('job_seeker', 'Job Seeker'),
-        ('company', 'Company')
-    ]
     username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=100, unique=True)
     address = models.CharField(max_length=300, null=True, blank=True)
     bio = models.CharField(max_length=400, null=True, blank=True)
-    profile_pic = models.ImageField(upload_to="templates", blank=True)
+    profile_pic = models.ImageField(upload_to="profile_pics", blank=True)
+
+    def __str__(self):
+        return self.username
 
 class job_seeker(models.Model):
-    j_username = models.OneToOneField(user, on_delete=models.CASCADE, primary_key=True, related_name="job_hunter")
+    j_username = models.OneToOneField(user, on_delete=models.CASCADE, primary_key=True, related_name="job_seeker")
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     role = models.CharField(max_length=30)
     gender = models.CharField(max_length=6)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class skills(models.Model):
     job_hunter = models.ForeignKey(job_seeker, on_delete=models.CASCADE, related_name="skills")
@@ -28,6 +30,10 @@ class company(models.Model):
     company_name = models.CharField(max_length=100)
     company_type = models.CharField(max_length=100)
     establishment_year = models.DateField()
+
+    def __str__(self):
+        return self.company_name
+
 
 class jobs(models.Model):
     job_id = models.AutoField(primary_key=True)
