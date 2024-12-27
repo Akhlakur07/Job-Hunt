@@ -62,3 +62,20 @@ def register_company(request):
         user_form = UserForm()
         company_form = CompanyForm()
     return render(request, 'jobs/register_company.html', {'user_form': user_form, 'company_form': company_form})
+
+
+def company_dashboard(request):
+    # Ensure the user is authenticated and is a company
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "company"):
+        return redirect('login')  # Redirect to login if user is not a company
+    
+    company_instance = user_instance.company
+    posted_jobs = jobs.objects.filter(c_username=company_instance)  # Fetch jobs posted by the company
+
+    context = {
+        'company': company_instance,
+        'posted_jobs': posted_jobs,
+        'user' : user_instance
+    }
+    return render(request, 'jobs/company_dashboard.html', context)

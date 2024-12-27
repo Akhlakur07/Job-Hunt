@@ -1,0 +1,45 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome, {{ company.company_name }}</h1>
+    <p>Company Details:</p>
+    <ul>
+        <li>Bio: {{ user.bio }}</li> <!-- Adjust based on your company model -->
+        <li>Establishment Year: {{ company.establishment_year }}</li> 
+    </ul>
+
+    <h2>Your Posted Jobs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Required Skills</th>
+                <th>Salary</th>
+                <th>Experience Rquired</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in posted_jobs %}
+            <tr>
+                <td>{{ job.title }}</td>
+                <td>{{ job.req_skill }}</td>
+                <td>{{ job.salary }}</td>
+                <td>{{ job.req_experience }} years</td>
+                <td>{{ job.deadline }}</td>
+                <td>
+                    <a href="#">Edit</a> |
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">You have not posted any jobs yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="back">Back to Home</a>
+</div>
+{% endblock %}
