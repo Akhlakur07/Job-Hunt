@@ -1,45 +1,65 @@
-{% extends 'jobs/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/company_dashboard.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'register_job_seeker' %}">Register as Job Seeker</a> |
+        <a href="{% url 'register_company' %}">Register as Company</a>
+    </nav>
+    <div class="content">
+        <div class="dashboard">
+            <h1>Welcome, {{ company.company_name }}</h1>
+            <p>Company Details:</p>
+            <div class="details">
+                <ul>
+                    <li>Bio: {{ user.bio }}</li>
+                    <li>Establishment Year: {{ company.establishment_year }}</li> 
+                </ul>
 
-{% block content %}
-<div class="dashboard">
-    <h1>Welcome, {{ company.company_name }}</h1>
-    <p>Company Details:</p>
-    <ul>
-        <li>Bio: {{ user.bio }}</li> <!-- Adjust based on your company model -->
-        <li>Establishment Year: {{ company.establishment_year }}</li> 
-    </ul>
+                <img src="#" alt="Picture">
 
-    <h2>Your Posted Jobs</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Job Title</th>
-                <th>Required Skills</th>
-                <th>Salary</th>
-                <th>Experience Rquired</th>
-                <th>Deadline</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for job in posted_jobs %}
-            <tr>
-                <td>{{ job.title }}</td>
-                <td>{{ job.req_skill }}</td>
-                <td>{{ job.salary }}</td>
-                <td>{{ job.req_experience }} years</td>
-                <td>{{ job.deadline }}</td>
-                <td>
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="6">You have not posted any jobs yet.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="/" class="back">Back to Home</a>
-</div>
-{% endblock %}
+            </div>
+
+            <h2>Your Posted Jobs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Required Skills</th>
+                        <th>Salary</th>
+                        <th>Experience Required</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in posted_jobs %}
+                    <tr>
+                        <td>{{ job.title }}</td>
+                        <td>{{ job.req_skill }}</td>
+                        <td>{{ job.salary }}</td>
+                        <td>{{ job.req_experience }} years</td>
+                        <td>{{ job.deadline }}</td>
+                        <td>
+                            <a class="actions" href="#">Edit</a> |
+                            <a class="actions" href="#">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">You have not posted any jobs yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'home' %}" class="back">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

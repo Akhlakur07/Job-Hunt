@@ -1,17 +1,15 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import UserForm, JobSeekerForm, CompanyForm
 from .models import *
 
 # Home View
-# @login_required(login_url='login')  # Redirect to login if not logged in
 def home(request):
     user_instance = user.objects.get(username=request.session['username'])
     if hasattr(user_instance, "job_seeker"):
-        return render(request, 'jobs/home.html', {'user': user_instance.job_seeker.first_name, 'user_type': "Job Seeker"})
+        return render(request, 'jobs/homes.html', {'user': user_instance.job_seeker.first_name, 'user_type': "Job Seeker"})
     elif hasattr(user_instance, "company"):
-        return render(request, 'jobs/home.html', {'user': user_instance.company.company_name, 'user_type': "Company"})
+        return render(request, 'jobs/homes.html', {'user': user_instance.company.company_name, 'user_type': "Company"})
 
 # Login
 def user_login(request):
@@ -65,7 +63,6 @@ def register_company(request):
 
 
 def company_dashboard(request):
-    # Ensure the user is authenticated and is a company
     user_instance = user.objects.get(username=request.session['username'])
     if not hasattr(user_instance, "company"):
         return redirect('login')  # Redirect to login if user is not a company

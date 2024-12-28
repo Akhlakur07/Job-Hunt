@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/homes.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'register_job_seeker' %}">Register as Job Seeker</a> |
+        <a href="{% url 'register_company' %}">Register as Company</a>
+    </nav>
+    <div class="content">
+        <h2>Welcome to Job Hunt!</h2>
+        <p>Hello, {{ user }}! You are logged in as a {{ user_type }}.</p>
+        {% if user_type == "Job Seeker" %}
+            <div class="actions">
+                <a href="#" class="btn btn-primary">View Available Jobs</a>
+                <a href="#" class="btn btn-secondary">View Profile</a>
+            </div>
+        {% elif user_type == "Company" %}
+            <div class="actions">
+                <a href="#" class="btn">Post a New Job</a>
+                <a href="{% url 'company_dashboard' %}" class="btn">View Profile</a>
+            </div>
+        {% endif %}
+        <form action="{% url 'user_logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

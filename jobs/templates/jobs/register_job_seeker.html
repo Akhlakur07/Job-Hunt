@@ -1,18 +1,26 @@
-{% extends 'jobs/base.html' %}
-{% block title %}Register as Job Seeker{% endblock %}
-
-{% block extra_css %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'jobs/register.css' %}">
-{% endblock %}
-
-{% block content %}
-<h2>Register as Job Seeker</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ seeker_form.as_p }}
-    <button type="submit">Register</button>
-</form>
-{% endblock %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as Job Seeker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/register.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register_job_seeker' %}">Register as Job Seeker</a> |
+        <a href="{% url 'register_company' %}">Register as Company</a>
+    </nav>
+    <div class="content">
+        <h2>Register as Job Seeker</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ seeker_form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

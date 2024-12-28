@@ -10,6 +10,13 @@ class UserForm(forms.ModelForm):
         }
 
 class JobSeekerForm(forms.ModelForm):
+    GENDER_CHOICES = [
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    ]
+
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, required=True)
+
     class Meta:
         model = job_seeker
         fields = ['first_name', 'last_name', 'role', 'gender']
@@ -18,3 +25,8 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = company
         fields = ['company_name', 'company_type', 'establishment_year']
+    
+    # Modify establishment_year field to be a DateField
+    establishment_year = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'placeholder': 'Select Year'})
+    )

@@ -1,39 +1,78 @@
-form {
-    width: 400px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #e9ecef;
+    color: #333;
+}
+
+nav {
+    background: #1f3140;
+    background: linear-gradient(to right, #99d6f2, #1f3140);
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #a5cbdb;
+}
+
+.content {
+    max-width: 500px;
     margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    background: #f7f7f7;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #444;
+    text-align: center;
 }
 
 form label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #444;
 }
 
-form input, form select {
+form input, form select, form textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.3s;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fafafa;
 }
 
-button {
+form button {
     width: 100%;
-    padding: 10px;
-    background: #3498db;
+    padding: 12px;
+    background: #1f3140;
+    background: linear-gradient(to right, #99d6f2, #1f3140);
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s ease;
 }
 
-button:hover {
-    background: #2980b9;
+form button:hover {
+    background: #a5cbdb;
 }
