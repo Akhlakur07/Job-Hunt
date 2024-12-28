@@ -13,6 +13,7 @@ nav {
     background: linear-gradient(to right, #99d6f2, #1f3140);
     padding: 15px;
     text-align: center;
+    color: #b4e0e8;
 }
 
 nav a {
@@ -30,7 +31,7 @@ nav a:hover {
 .content {
     text-align: center;
     padding: 40px 20px;
-    max-width: 800px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
@@ -82,4 +83,47 @@ form {
 .logout:hover {
     background: #c9302c;
     transition: background 0.3s ease;
+}
+
+.featured-jobs {
+    margin: 20px auto;
+    padding: 20px;
+    background: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.featured-jobs h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #444;
+}
+
+.featured-jobs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.featured-jobs ul li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.featured-jobs ul li:last-child {
+    border-bottom: none;
+}
+
+.featured-jobs ul li h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.featured-jobs ul li p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    color: #666;
 }

@@ -1,5 +1,5 @@
 from django import forms
-from .models import user, job_seeker, company
+from .models import user, job_seeker, company, jobs
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -30,3 +30,11 @@ class CompanyForm(forms.ModelForm):
     establishment_year = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date', 'placeholder': 'Select Year'})
     )
+
+class JobForm(forms.ModelForm):
+    class Meta:
+        model = jobs
+        fields = ['req_skill', 'title', 'limit', 'salary', 'description', 'req_experience', 'deadline']
+        widgets = {
+            'deadline': forms.DateInput(attrs={'type': 'date'}),
+        }

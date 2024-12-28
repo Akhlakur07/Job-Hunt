@@ -9,11 +9,11 @@ body {
 }
 
 nav {
-    background: #1f3140;
     background: linear-gradient(to right, #99d6f2, #1f3140);
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #b6dbe88d;
 }
 
 nav a {
@@ -35,12 +35,43 @@ nav a:hover {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-h1 {
+img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid #fff;
+}
+
+.welcome {
+    text-align: center;
+    margin: 100px 0 20px;
     font-size: 2rem;
-    margin-bottom: 20px;
     color: #444;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+h2 {
+    margin-top: 40px;
+    font-size: 1.5rem;
+    color: #444;
+    border-bottom: 2px solid #1f3140;
+    padding-bottom: 5px;
 }
 
 table {
@@ -58,6 +89,11 @@ table th, table td {
 
 table th {
     background: #f4f4f4;
+    color: #1f3140;
+}
+
+table td {
+    background: #fafafa;
 }
 
 .actions {
@@ -71,18 +107,43 @@ table th {
     color: #a5cbdb;
 }
 
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+form input, form select, form textarea {
+    width: 90%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fafafa;
+}
+
 .back {
     display: inline-block;
-    text-decoration: none;
-    margin-top: 20px;
-    padding: 12px 30px;
+    margin-top: 30px;
+    margin-left: 32px;
+    padding: 15px 35px;
     background: #73A2BA;
     color: white;
+    border: 1px solid #ddd;
     border-radius: 5px;
     text-align: center;
     transition: background 0.3s ease;
 }
 
 .back:hover {
-    background: #5A8096;
+    background: #48b171;
+}
+
+.edit_job {
+    text-align: center;
+    margin: 27px 0 20px;
+    font-size: 2rem;
+    color: #444;
 }

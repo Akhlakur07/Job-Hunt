@@ -1,15 +1,32 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from .forms import UserForm, JobSeekerForm, CompanyForm
+from .forms import UserForm, JobSeekerForm, CompanyForm, JobForm
 from .models import *
+from django.db.models import Count
+from random import sample
 
 # Home View
 def home(request):
     user_instance = user.objects.get(username=request.session['username'])
+    
+    # Fetch random 3 jobs
+    all_jobs = jobs.objects.all()
+    featured_jobs = sample(list(all_jobs), min(3, len(all_jobs)))
+
     if hasattr(user_instance, "job_seeker"):
-        return render(request, 'jobs/homes.html', {'user': user_instance.job_seeker.first_name, 'user_type': "Job Seeker"})
+        context = {
+            'user': user_instance.job_seeker.first_name,
+            'user_type': "Job Seeker",
+            'featured_jobs': featured_jobs
+        }
+        return render(request, 'jobs/homes.html', context)
     elif hasattr(user_instance, "company"):
-        return render(request, 'jobs/homes.html', {'user': user_instance.company.company_name, 'user_type': "Company"})
+        context = {
+            'user': user_instance.company.company_name,
+            'user_type': "Company",
+            'featured_jobs': featured_jobs
+        }
+        return render(request, 'jobs/homes.html', context)
 
 # Login
 def user_login(request):
@@ -43,7 +60,8 @@ def register_job_seeker(request):
     else:
         user_form = UserForm()
         seeker_form = JobSeekerForm()
-    return render(request, 'jobs/register_job_seeker.html', {'user_form': user_form, 'seeker_form': seeker_form})
+    context = {'user_form': user_form, 'seeker_form': seeker_form}
+    return render(request, 'jobs/register_job_seeker.html', context)
 
 # Registration for Company
 def register_company(request):
@@ -70,9 +88,64 @@ def company_dashboard(request):
     company_instance = user_instance.company
     posted_jobs = jobs.objects.filter(c_username=company_instance)  # Fetch jobs posted by the company
 
+    if request.method == "POST":
+        job_form = JobForm(request.POST)
+        if job_form.is_valid():
+            job = job_form.save(commit=False)
+            job.c_username = company_instance  # Link job to the company
+            job.save()
+            return redirect('company_dashboard')
+    else:
+        job_form = JobForm()
+
     context = {
         'company': company_instance,
         'posted_jobs': posted_jobs,
-        'user' : user_instance
+        'user' : user_instance,
+        'job_form': job_form
     }
     return render(request, 'jobs/company_dashboard.html', context)
+
+
+def edit_job(request, job_id):
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "company"):
+        return redirect('login')
+
+    company_instance = user_instance.company
+    job_instance = jobs.objects.get(job_id=job_id, c_username=company_instance)
+
+    if request.method == "POST":
+        job_form = JobForm(request.POST, instance=job_instance)
+        if job_form.is_valid():
+            job_form.save()
+            return redirect('company_dashboard')
+    else:
+        job_form = JobForm(instance=job_instance)
+
+    context = {
+        'job_form': job_form,
+        'job': job_instance,
+        'company': company_instance,
+    }
+    return render(request, 'jobs/edit_job.html', context)
+
+
+
+def delete_job(request, job_id):
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "company"):
+        return redirect('login')
+
+    company_instance = user_instance.company
+    job_instance = jobs.objects.get(job_id=job_id, c_username=company_instance)
+
+    if request.method == "POST":
+        job_instance.delete()
+        return redirect('company_dashboard')
+
+    context = {
+        'job': job_instance,
+        'company': company_instance,
+    }
+    return render(request, 'jobs/delete_job.html', context)
