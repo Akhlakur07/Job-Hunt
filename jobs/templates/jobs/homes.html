@@ -11,7 +11,11 @@
     <nav>
         <a href="{% url 'register_job_seeker' %}">Register as Job Seeker</a> |
         <a href="{% url 'register_company' %}">Register as Company</a> |
+        {% if user_type == "Company" %}
         <a href="{% url 'company_dashboard' %}">Profile</a> |
+        {% elif user_type == "Job Seeker" %}
+        <a href="{% url 'seeker_dashboard' %}">Profile</a> |
+        {% endif %}
         <a href="{% url 'user_logout' %}">Logout</a>
     </nav>
     <div class="content">

@@ -28,25 +28,25 @@ def home(request):
         }
         return render(request, 'jobs/homes.html', context)
 
-# Login
+
 def user_login(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         try:
             user_instance = user.objects.get(username=username, password=password)
-            request.session['username'] = user_instance.username  # store session
+            request.session['username'] = user_instance.username  
             return redirect('home')
         except user.DoesNotExist:
             return render(request, 'jobs/login.html', {'error': "Invalid username or password"})
     return render(request, 'jobs/login.html')
 
-# Logout
+
 def user_logout(request):
     logout(request)
     return redirect('login') 
 
-# Registration for Job Seeker
+
 def register_job_seeker(request):
     if request.method == "POST":
         user_form = UserForm(request.POST, request.FILES)
@@ -54,7 +54,7 @@ def register_job_seeker(request):
         if user_form.is_valid() and seeker_form.is_valid():
             user_instance = user_form.save()
             job_seeker_instance = seeker_form.save(commit=False)
-            job_seeker_instance.j_username = user_instance  # Link Job Seeker to User
+            job_seeker_instance.j_username = user_instance 
             job_seeker_instance.save()
             return redirect('login') 
     else:
@@ -63,7 +63,7 @@ def register_job_seeker(request):
     context = {'user_form': user_form, 'seeker_form': seeker_form}
     return render(request, 'jobs/register_job_seeker.html', context)
 
-# Registration for Company
+
 def register_company(request):
     if request.method == "POST":
         user_form = UserForm(request.POST, request.FILES)
@@ -71,7 +71,7 @@ def register_company(request):
         if user_form.is_valid() and company_form.is_valid():
             user_instance = user_form.save()
             company_instance = company_form.save(commit=False)
-            company_instance.c_username = user_instance  # Link Company to User
+            company_instance.c_username = user_instance 
             company_instance.save()
             return redirect('login') 
     else:
@@ -80,19 +80,42 @@ def register_company(request):
     return render(request, 'jobs/register_company.html', {'user_form': user_form, 'company_form': company_form})
 
 
+def job_seeker_dashboard(request):
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "job_seeker"):
+        return redirect('login') 
+
+    job_seeker_instance = user_instance.job_seeker
+    applied_jobs = apply.objects.filter(j_username=job_seeker_instance)  
+    skills_list = skills.objects.filter(job_hunter=job_seeker_instance)  
+
+    if request.method == "POST":
+        skill_name = request.POST.get('skill_name')
+        experience = request.POST.get('experience')
+        if skill_name and experience:
+            skills.objects.create(job_hunter=job_seeker_instance, skill_name=skill_name, experience=experience)
+
+    context = {
+        'job_seeker': job_seeker_instance,
+        'applied_jobs': applied_jobs,
+        'skills': skills_list,
+        'user': user_instance,
+    }
+    return render(request, 'jobs/seeker_dashboard.html', context)
+
 def company_dashboard(request):
     user_instance = user.objects.get(username=request.session['username'])
     if not hasattr(user_instance, "company"):
-        return redirect('login')  # Redirect to login if user is not a company
+        return redirect('login')  
     
     company_instance = user_instance.company
-    posted_jobs = jobs.objects.filter(c_username=company_instance)  # Fetch jobs posted by the company
+    posted_jobs = jobs.objects.filter(c_username=company_instance) 
 
     if request.method == "POST":
         job_form = JobForm(request.POST)
         if job_form.is_valid():
             job = job_form.save(commit=False)
-            job.c_username = company_instance  # Link job to the company
+            job.c_username = company_instance  
             job.save()
             return redirect('company_dashboard')
     else:
