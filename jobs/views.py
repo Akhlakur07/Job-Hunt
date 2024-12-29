@@ -172,3 +172,25 @@ def delete_job(request, job_id):
         'company': company_instance,
     }
     return render(request, 'jobs/delete_job.html', context)
+
+def view_jobs(request):
+    search_query = request.GET.get('search', '') # Get search query ('search') from URL also default value is empty string ('')
+    skill_filter = request.GET.get('skill', '')
+    experience_filter = request.GET.get('experience', '')
+
+    all_jobs = jobs.objects.all()
+    
+    if search_query:
+        all_jobs = all_jobs.filter(title__icontains=search_query) #__icontains is case-insensitive
+    if skill_filter:
+        all_jobs = all_jobs.filter(req_skill__icontains=skill_filter)
+    if experience_filter:
+        all_jobs = all_jobs.filter(req_experience__lte=experience_filter)  # __lte is Less than or equal to
+
+    context = {
+        'jobs': all_jobs,
+        'search_query': search_query,
+        'skill_filter': skill_filter,
+        'experience_filter': experience_filter
+    }
+    return render(request, 'jobs/view_jobs.html', context)

@@ -13,7 +13,7 @@ nav {
     background: linear-gradient(to right, #99d6f2, #1f3140);
     padding: 15px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #b4e0e8;
 }
 
 nav a {

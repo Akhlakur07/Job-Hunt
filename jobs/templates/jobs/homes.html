@@ -23,7 +23,7 @@
         <p>Hello, {{ user }}! You are logged in as a {{ user_type }}.</p>
         {% if user_type == "Job Seeker" %}
             <div class="actions">
-                <a href="#" class="btn">View Available Jobs</a>
+                <a href="{% url 'view_jobs' %}" class="btn">View Available Jobs</a>
             </div>
         {% elif user_type == "Company" %}
             <div class="actions">

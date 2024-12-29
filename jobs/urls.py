@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit-job/<int:job_id>/', views.edit_job, name='edit_job'),
     path('delete-job/<int:job_id>/', views.delete_job, name='delete_job'),
     path('seeker/dashboard/', views.job_seeker_dashboard, name='seeker_dashboard'),
+    path('seeker/jobs/', views.view_jobs, name='view_jobs'),
 ]
