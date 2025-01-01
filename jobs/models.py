@@ -3,6 +3,7 @@ from django.db import models
 class user(models.Model):
     username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=100, unique=True)
+    is_admin = models.BooleanField(default=False) 
     address = models.CharField(max_length=300, null=True, blank=True)
     bio = models.CharField(max_length=400, null=True, blank=True)
     profile_pic = models.ImageField(upload_to="profile_pics", blank=True)

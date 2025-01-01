@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+header {
+    background: #343a40;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+header .logout a {
+    background: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+header .logout a:hover {
+    background: #b02a37;
+}
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    font-size: 1.5rem;
+    color: #343a40;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.item {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1 1 calc(45% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item p {
+    margin: 5px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn.accept {
+    background: #28a745;
+}
+
+.btn.accept:hover {
+    background: #218838;
+}
+
+.btn.reject {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn.reject:hover {
+    background: #e0a800;
+}
+
+.btn.neutral {
+    background: #17a2b8;
+}
+
+.btn.neutral:hover {
+    background: #138496;
+}
+
+.btn.del {
+    background: #dc3545;
+}
+
+.btn.del:hover {
+    background: #b02a37;
+}

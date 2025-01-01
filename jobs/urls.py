@@ -15,4 +15,10 @@ urlpatterns = [
     path('jobs/apply/<int:job_id>/', views.apply_for_job, name='apply_for_job'),
     path('company/applications/', views.view_applications, name='view_applications'),
     path('company/application/<int:application_id>/<str:action>/', views.manage_application, name='manage_application'),
+    path('admin-c/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin-c/delete_user/<str:user_id>/', views.delete_user, name='delete_user'),
+    path('admin-c/manage_application/<int:application_id>/<str:action>/', views.approve_application, name='manage_application'),
+    path('admin-c/delete_skill/<int:skill_id>/', views.delete_skill_a, name='delete_skill_a'),
+    path('admin-c/delete_job/<int:job_id>/', views.delete_job_a, name='delete_job_a'),
+    path('admin-c/delete_application/<int:application_id>/', views.delete_application_a, name='delete_application_a'),
 ]

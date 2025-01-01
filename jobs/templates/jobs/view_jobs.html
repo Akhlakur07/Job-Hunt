@@ -10,7 +10,11 @@
 <body>
     <nav>
         <a href="{% url 'home' %}">Home</a> |
+        {% if user_type == "Job Seeker" %}
         <a href="{% url 'seeker_dashboard' %}">Profile</a> |
+        {% elif user_type == "Company" %}
+        <a href="{% url 'company_dashboard' %}">Profile</a> |
+        {% endif %}
         <a href="{% url 'user_logout' %}">Logout</a>
     </nav>
 
@@ -36,7 +40,9 @@
                     <th>Experience (Years)</th>
                     <th>Salary</th>
                     <th>Deadline</th>
+                    {% if user_type == "Job Seeker" %}
                     <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -48,9 +54,11 @@
                     <td>{{ job.req_experience }}</td>
                     <td>${{ job.salary }}</td>
                     <td>{{ job.deadline }}</td>
+                    {% if user_type == "Job Seeker" %}
                     <td>
                         <a href="{% url 'apply_for_job' job.job_id %}">Apply</a>
                     </td>
+                    {% endif %}
                 </tr>
                 {% empty %}
                 <tr>

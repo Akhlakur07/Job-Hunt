@@ -39,6 +39,8 @@ def user_login(request):
         try:
             user_instance = user.objects.get(username=username, password=password)
             request.session['username'] = user_instance.username  
+            if user_instance.is_admin:
+                return redirect('admin_dashboard')
             return redirect('home')
         except user.DoesNotExist:
             return render(request, 'jobs/login.html', {'error': "Invalid username or password"})
@@ -180,6 +182,11 @@ def view_jobs(request):
     search_query = request.GET.get('search', '') # Get search query ('search') from URL also default value is empty string ('')
     skill_filter = request.GET.get('skill', '')
     experience_filter = request.GET.get('experience', '')
+    user_instance = user.objects.get(username=request.session['username'])
+    if hasattr(user_instance, "job_seeker"):
+        user_type = "Job Seeker" 
+    else: 
+        user_type = "Company"
 
     all_jobs = jobs.objects.all()
     
@@ -194,7 +201,8 @@ def view_jobs(request):
         'jobs': all_jobs,
         'search_query': search_query,
         'skill_filter': skill_filter,
-        'experience_filter': experience_filter
+        'experience_filter': experience_filter,
+        'user_type': user_type
     }
     return render(request, 'jobs/view_jobs.html', context)
 
@@ -274,3 +282,56 @@ def manage_application(request, application_id, action):
         messages.error(request, f"Unfortunately, your application for the job '{application.job_id.title}' has been rejected.")
     application.save()
     return redirect('view_applications')
+
+
+
+
+def admin_dashboard(request):
+    user_instance = user.objects.get(username=request.session['username'])
+    if user_instance.is_admin == False:
+        return redirect('login')
+
+    users = user.objects.all()
+    applications = apply.objects.all()
+    job_posts = jobs.objects.all()
+    skills_list = skills.objects.all()
+    return render(request, 'jobs/admin_dashboard.html', {
+        'users': users,
+        'applications': applications,
+        'job_posts': job_posts,
+        'skills': skills_list
+    })
+
+def delete_user(request, user_id):
+    user_instance = get_object_or_404(user, pk=user_id)
+    user_instance.delete()
+    return redirect('admin_dashboard')
+
+def approve_application(request, application_id, action):
+    application = get_object_or_404(apply)
+    if action == "accept":
+        application.accepted = True
+        application.rejected = False
+    elif action == "reject":
+        application.rejected = True
+        application.accepted = False
+    elif action == "pending":
+        application.rejected = False
+        application.accepted = False
+    application.save()
+    return redirect('admin_dashboard')
+
+def delete_skill_a(request, skill_id):
+    skill_instance = get_object_or_404(skills, pk=skill_id)
+    skill_instance.delete()
+    return redirect('admin_dashboard')
+
+def delete_job_a(request, job_id):
+    job_instance = get_object_or_404(jobs, pk=job_id)
+    job_instance.delete()
+    return redirect('admin_dashboard')
+
+def delete_application_a(request, application_id):
+    application_instance = get_object_or_404(apply, pk=application_id)
+    application_instance.delete()
+    return redirect('admin_dashboard')

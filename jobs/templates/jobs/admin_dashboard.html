@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/admin_dashboard.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <div class="logout">
+            <a href="{% url 'user_logout' %}">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Manage Users</h2>
+            <div class="list-container">
+                {% for user in users %}
+                {% if user.is_admin == False %}
+                <div class="item">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <a class="btn del" href="{% url 'delete_user' user.username %}" onclick="return confirm('Are you sure you want to delete this user?');">Delete User</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h2>Manage Applications</h2>
+            <div class="list-container">
+                {% for application in applications %}
+                <div class="item">
+                    <p>
+                        <strong>Job:</strong> {{ application.job_id.title }} <br>
+                        <strong>Applicant:</strong> {{ application.j_username }} <br>
+                        {% if application.accepted %}
+                        <strong>Status:</strong> Accepted
+                        {% elif application.rejected %}
+                        <strong>Status:</strong> Rejected
+                        {% else %}
+                        <strong>Status:</strong> Pending
+                        {% endif %}
+                    </p>
+                    <a class="btn accept" href="{% url 'manage_application' application.id 'accept' %}">Accept</a>
+                    <a class="btn reject" href="{% url 'manage_application' application.id 'reject' %}">Reject</a>
+                    <a class="btn neutral" href="{% url 'manage_application' application.id 'pending' %}">Pending</a>
+                    <a class="btn del" href="{% url 'delete_application_a' application.id %}" onclick="return confirm('Are you sure you want to delete this application?');">Delete</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h2>Manage Job Posts</h2>
+            <div class="list-container">
+                {% for job in job_posts %}
+                <div class="item">
+                    <p>
+                        <strong>Company:</strong> {{ job.c_username }} <br>
+                        <strong>Title:</strong> {{ job.title }}
+                    </p>
+                    <a class="btn del" href="{% url 'delete_job_a' job.job_id %}" onclick="return confirm('Are you sure you want to delete this job post?');">Delete Job</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h2>Manage Skills</h2>
+            <div class="list-container">
+                {% for skill in skills %}
+                <div class="item">
+                    <p>
+                        <strong>Job Seeker:</strong> {{ skill.job_hunter }} <br>
+                        <strong>Skill:</strong> {{ skill.skill_name }} <br>
+                        <strong>Experience</strong> {{ skill.experience }} years
+                    </p>
+                    <a class="btn del" href="{% url 'delete_skill_a' skill.id %}">Delete Skill</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
