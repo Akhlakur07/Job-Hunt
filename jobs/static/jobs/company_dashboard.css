@@ -124,20 +124,42 @@ form input, form select, form textarea {
     background: #fafafa;
 }
 
-.back {
-    display: inline-block;
+.del_text {
+    display: block;
     margin-top: 30px;
-    margin-left: 32px;
-    padding: 15px 35px;
-    background: #73A2BA;
-    color: white;
-    border: 1px solid #ddd;
+    margin-bottom: 35px;
+    font-weight: bold;
+}
+
+.cancel, .del, .save_edit {
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.back:hover {
+.del {
+    background: #ec3d30e4;
+    color: #fff;
+    padding: 14px 17px;
+    font-size: 15px;
+    
+}
+
+.del:hover {
+    background: #dc1616db;
+}
+
+.cancel {
+    background: #73A2BA;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel:hover {
     background: #48b171;
 }
 
@@ -146,4 +168,52 @@ form input, form select, form textarea {
     margin: 27px 0 20px;
     font-size: 2rem;
     color: #444;
+}
+
+.save_edit {
+    background: #41bc7aab;
+    color: #fff;
+    padding: 14px 17px;
+    font-size: 15px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.save_edit:hover {
+    background: #54ee9c;
+}
+
+.post {
+    margin-top: 30px;
+    margin-left: 30px;
+    padding: 15px 25px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    background: #73A2BA;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.post:hover {
+    background: #41bc7aab;
+}
+
+.view .btn {
+    margin: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-weight: 500;
+    color: white;
+    display: inline-block;
+    background: #73A2BA;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+    background: #5A8096;
 }

@@ -52,12 +52,14 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'view_applications' %}">View Applications</a>
+        <div class="view">
+            <a href="{% url 'view_applications' %}" class="btn">View Applications</a>
+        </div>
         <h2>Post a New Job</h2>
         <form method="post">
             {% csrf_token %}
             {{ job_form.as_p }}
-            <button type="submit" class="back">Post Job</button>
+            <button type="submit" class="post">Post Job</button>
         </form>
     </div>
 </body>
