@@ -9,11 +9,10 @@ body {
 }
 
 nav {
-    background: #1f3140;
-    background: linear-gradient(to right, #99d6f2, #1f3140);
+    background: #2E2E2E;
     padding: 15px;
     text-align: center;
-    color: #b4e0e8;
+    color: #fff;
 }
 
 nav a {
@@ -25,7 +24,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #a5cbdb;
+    color: #e74c3c; 
 }
 
 .content {

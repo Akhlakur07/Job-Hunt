@@ -1,139 +1,116 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 body {
-    font-family: 'Popins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: #f9f9f9;
+    background: #f4f4f4;
     color: #333;
 }
 
 nav {
-    background: #1f3140;
-    background: linear-gradient(to right, #99d6f2, #1f3140);
-    padding: 15px;
-    text-align: center;
-    color: #b4e0e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c1c1c;
+    color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-nav a {
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ff3b3b;
+}
+
+.nav-links a {
     color: #fff;
     margin: 0 15px;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-nav a:hover {
-    color: #a5cbdb;
+.nav-links a:hover {
+    color: #ff3b3b; 
+}
+
+
+.hero {
+    text-align: center;
+    background: linear-gradient(135deg, #1c1c1c, #333);
+    color: #fff;
+    padding: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin: 0 0 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin: 0 0 20px;
+}
+
+.hero .view {
+    display: inline-block;
+    background: #ff3b3b;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.hero .view:hover {
+    background: #ff0000;
 }
 
 .content {
-    text-align: center;
-    padding: 40px 20px;
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
 
-.content h2 {
+.featured .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 200px;
+}
+
+.jobs {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(180, 20, 20, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.jobs:hover {
+    box-shadow: 0 4px 12px rgba(199, 18, 18, 0.542);
+}
+
+.jobs p {
+    margin: 8px 0;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.jobs p strong {
+    color: #1c1c1c;
+}
+
+.featured h2 {
+    text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #444;
-    text-align: center;
-}
-
-.content p {
-    font-size: 1rem;
-    color: #555;
-    text-align: center;
-}
-
-.actions .btn {
-    margin: 10px;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-weight: 500;
-    color: white;
-    display: inline-block;
-    background: #73A2BA;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.btn:hover {
-    background: #5A8096;
-}
-
-form {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.logout {
-    padding: 12px 30px;
-    background: #d9534f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.logout:hover {
-    background: #c9302c;
-    transition: background 0.3s ease;
-}
-
-.featured-jobs {
-    margin: 20px auto;
-    padding: 20px;
-    background: #f3f3f3;
-    border-radius: 10px;
-    box-shadow: 2px 2px 7px rgb(118, 117, 117);
-}
-
-.featured-jobs h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #444;
-}
-
-.featured-jobs ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.featured-jobs ul li {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.featured-jobs ul li:last-child {
-    border-bottom: none;
-}
-
-.featured-jobs ul li h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.featured-jobs ul li p {
-    font-size: 0.9rem;
-    margin: 5px 0;
-    color: #666;
-}
-
-.messages .success {
-    font-style: italic;
-    color: #5cb85c;
-}
-
-.messages .error {
-    font-style: italic;
-    color: #d9534f;
+    color: #333;
 }

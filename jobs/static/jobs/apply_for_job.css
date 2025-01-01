@@ -4,8 +4,27 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: #e9ecef;
+    background: #f7f7f7;
     color: #333;
+}
+
+nav {
+    background: #111;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e74c3c;
 }
 
 .content {
@@ -18,25 +37,6 @@ body {
     text-align: center;
 }
 
-nav {
-    background: #1f3140;
-    background: linear-gradient(to right, #99d6f2, #1f3140);
-    padding: 15px;
-    text-align: center;
-    color: #b4e0e8;
-}
-
-nav a {
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #a5cbdb;
-}
 
 form {
     margin-top: 20px;
@@ -63,7 +63,7 @@ form input, form textarea, form select {
 
 form button {
     padding: 10px 20px;
-    background: #73A2BA;
+    background: #0e0101d2;
     color: white;
     border: none;
     border-radius: 5px;

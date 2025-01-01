@@ -4,20 +4,19 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: #e9ecef;
-    color: #333;
+    background: #f7f7f7; 
+    color: #333; 
 }
 
 nav {
-    background: #1f3140;
-    background: linear-gradient(to right, #99d6f2, #1f3140);
+    background: #111; 
     padding: 15px;
     text-align: center;
-    color: #b4e0e8;
+    color: #fff; 
 }
 
 nav a {
-    color: #fff;
+    color: #fff; 
     margin: 0 15px;
     text-decoration: none;
     font-weight: 600;
@@ -25,7 +24,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #a5cbdb;
+    color: #e74c3c; 
 }
 
 .content {
@@ -34,7 +33,7 @@ nav a:hover {
     background: #fff;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     position: relative;
 }
 
@@ -44,7 +43,7 @@ img {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     position: absolute;
     top: -35px;
     left: 50%;
@@ -56,7 +55,7 @@ img {
     text-align: center;
     margin: 100px 0 20px;
     font-size: 2rem;
-    color: #444;
+    color: #111;
 }
 
 p {
@@ -69,8 +68,8 @@ p {
 h2 {
     margin-top: 40px;
     font-size: 1.5rem;
-    color: #444;
-    border-bottom: 2px solid #1f3140;
+    color: #111; 
+    border-bottom: 2px solid #e74c3c; 
     padding-bottom: 5px;
 }
 
@@ -88,30 +87,30 @@ table th, table td {
 }
 
 table th {
-    background: #f4f4f4;
-    color: #1f3140;
+    background: #2E2E2E; 
+    color: #fff; 
 }
 
 table td {
-    background: #fafafa;
+    background: #f7f7f7; 
 }
 
 .actions {
-    color: #1f3140;
+    color: #000000; 
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .actions:hover {
-    color: #a5cbdb;
+    color: #c0392b; 
 }
 
 form label {
     display: block;
     margin-top: 10px;
     font-weight: 600;
-    color: #444;
+    color: #111;
 }
 
 form input, form select, form textarea {
@@ -121,14 +120,16 @@ form input, form select, form textarea {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background: #fafafa;
+    background: #f7f7f7; 
 }
 
 .del_text {
-    display: block;
     margin-top: 30px;
     margin-bottom: 35px;
+    margin-left: 0px;
     font-weight: bold;
+    color: #e74c3c;
+    text-align: left;
 }
 
 .cancel, .del, .save_edit {
@@ -141,64 +142,60 @@ form input, form select, form textarea {
 }
 
 .del {
-    background: #ec3d30e4;
-    color: #fff;
-    padding: 14px 17px;
-    font-size: 15px;
-    
+    background: #e74c3c; 
+    color: #fff; 
+    padding: 15px 20px;
 }
 
 .del:hover {
-    background: #dc1616db;
+    background: #c0392b;
 }
 
 .cancel {
-    background: #73A2BA;
+    background: #555; 
     color: #fff;
     text-decoration: none;
-    display: inline-block;
 }
 
 .cancel:hover {
-    background: #48b171;
+    background: #333; 
 }
 
 .edit_job {
     text-align: center;
     margin: 27px 0 20px;
     font-size: 2rem;
-    color: #444;
+    color: #111;
 }
 
 .save_edit {
-    background: #41bc7aab;
+    background: #363535; 
     color: #fff;
-    padding: 14px 17px;
-    font-size: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 30px;
+    padding: 15px;
 }
 
 .save_edit:hover {
-    background: #54ee9c;
+    background: #41c71b; 
 }
 
 .post {
     margin-top: 30px;
     margin-left: 30px;
-    padding: 15px 25px;
+    padding: 10px 35px;
     text-decoration: none;
     border: 1px solid #ddd;
     border-radius: 5px;
     color: white;
     display: inline-block;
-    background: #73A2BA;
+    background: #2E2E2E;
     font-size: 16px;
-    transition: background 0.3s ease;
+    transition: background 0.3s;
 }
 
 .post:hover {
-    background: #41bc7aab;
+    background: #73b86c;
 }
 
 .view .btn {
@@ -210,10 +207,11 @@ form input, form select, form textarea {
     font-weight: 500;
     color: white;
     display: inline-block;
-    background: #73A2BA;
-    transition: background 0.3s ease, color 0.3s ease;
+    background: #2E2E2E; 
+    margin-left: 0px;
+    transition: background 0.3s;
 }
 
 .btn:hover {
-    background: #5A8096;
+    background: #76b56e;
 }

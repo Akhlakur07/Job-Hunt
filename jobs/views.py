@@ -14,7 +14,7 @@ def home(request):
     
     # Fetch random 3 jobs
     all_jobs = jobs.objects.all()
-    featured_jobs = sample(list(all_jobs), min(3, len(all_jobs)))
+    featured_jobs = sample(list(all_jobs), min(4, len(all_jobs)))
 
     if hasattr(user_instance, "job_seeker"):
         context = {
@@ -215,13 +215,12 @@ def apply_for_job(request, job_id):
     job_seeker_instance = user_instance.job_seeker
     job_instance = get_object_or_404(jobs, job_id=job_id)
 
-    # Check if the job seeker has already applied
+
     if apply.objects.filter(job_id=job_instance, j_username=job_seeker_instance).exists():
         return render(request, 'jobs/job_application_error.html', {
             'error': "You have already applied for this job."
         })
 
-    # Check skill and experience requirements
     seeker_skills = skills.objects.filter(job_hunter=job_seeker_instance)
     skill_names = [skill.skill_name.lower() for skill in seeker_skills]
     max_experience = seeker_skills.aggregate(max_experience=Max('experience'))['max_experience']
@@ -231,7 +230,6 @@ def apply_for_job(request, job_id):
             'error': "You do not meet the skill or experience requirements for this job."
         })
 
-    # Handle CV upload and application creation
     if request.method == "POST":
         form = ApplyForm(request.POST, request.FILES)
         if form.is_valid():
@@ -308,7 +306,7 @@ def delete_user(request, user_id):
     return redirect('admin_dashboard')
 
 def approve_application(request, application_id, action):
-    application = get_object_or_404(apply)
+    application = get_object_or_404(apply, pk=application_id)
     if action == "accept":
         application.accepted = True
         application.rejected = False

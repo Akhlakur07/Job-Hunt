@@ -9,8 +9,7 @@ body {
 }
 
 nav {
-    background: #1f3140;
-    background: linear-gradient(to right, #99d6f2, #1f3140);
+    background: black;
     padding: 15px;
     text-align: center;
     color: #b4e0e8;
@@ -74,7 +73,7 @@ nav a:hover {
 }
 
 .search-bar button {
-    background: #73A2BA;
+    background: #000000ca;
     color: #fff;
     padding: 14px 19px;
     font-size: 15px;

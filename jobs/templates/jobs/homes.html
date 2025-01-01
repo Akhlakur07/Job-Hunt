@@ -9,49 +9,53 @@
 </head>
 <body>
     <nav>
-        {% if user_type == "Company" %}
-        <a href="{% url 'company_dashboard' %}">Profile</a> |
-        {% elif user_type == "Job Seeker" %}
-        <a href="{% url 'seeker_dashboard' %}">Profile</a> |
-        {% endif %}
-        <a href="{% url 'user_logout' %}">Logout</a>
+        <div class="logo">
+            <span>Job Hunt</span>
+        </div>
+        <div class="nav-links">
+            {% if user_type == "Company" %}
+            <a href="{% url 'company_dashboard' %}">Profile</a>
+            {% elif user_type == "Job Seeker" %}
+            <a href="{% url 'seeker_dashboard' %}">Profile</a>
+            {% endif %}
+            <a href="{% url 'user_logout' %}">Logout</a>
+        </div>
     </nav>
+    <header class="hero">
+        <h1>Welcome to Job Hunt!</h1>
+        <p>Your dream job awaits.</p>
+        {% if user_type == "Job Seeker" %}
+            <a href="{% url 'view_jobs' %}" class="view">View Available Jobs</a>
+        {% elif user_type == "Company" %}
+            <a href="{% url 'view_jobs' %}" class="view">View All Jobs</a>
+        {% endif %}
+    </header>
     <div class="content">
         {% if messages %}
-            <ul class="messages">
-                {% for i in messages %}
-                    <li class="{{ i.tags }}">{{ i }}</li>
-                {% endfor %}
-            </ul>
+        <ul class="messages">
+            {% for i in messages %}
+                <li class="{{ i.tags }}">{{ i }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
-        <h2>Welcome to Job Hunt!</h2>
-        <p>Hello, {{ user }}! You are logged in as a {{ user_type }}.</p>
-        {% if user_type == "Job Seeker" %}
-            <div class="actions">
-                <a href="{% url 'view_jobs' %}" class="btn">View Available Jobs</a>
-            </div>
-        {% elif user_type == "Company" %}
-            <div class="actions">
-                <a href="{% url 'view_jobs' %}" class="btn">All Jobs</a>
-            </div>
-        {% endif %}
-        <div class="featured-jobs">
+        <section class="featured">
             <h2>Featured Jobs</h2>
-            <ul>
+            <div class="grid">
                 {% for job in featured_jobs %}
-                <li>
-                    <h3>{{ job.title }}</h3>
+                <div class="jobs">
                     <p><strong>Company:</strong> {{ job.c_username.company_name }}</p>
                     <p><strong>Skills Required:</strong> {{ job.req_skill }}</p>
                     <p><strong>Salary:</strong> ${{ job.salary }}</p>
-                    <p><strong>Experience Required:</strong> {{ job.req_experience }} years</p>
+                    <p><strong>Experience:</strong> {{ job.req_experience }} years</p>
+                    <p><strong>Description:</strong> {{ job.description }}</p>
                     <p><strong>Deadline:</strong> {{ job.deadline }}</p>
-                </li>
+                </div>
                 {% empty %}
                 <p>No featured jobs available at the moment.</p>
                 {% endfor %}
-            </ul>
-        </div>
-    </div>    
+            </div>
+        </section>
+        
+    </div>
 </body>
 </html>
