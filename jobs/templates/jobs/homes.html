@@ -9,8 +9,6 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'register_job_seeker' %}">Register as Job Seeker</a> |
-        <a href="{% url 'register_company' %}">Register as Company</a> |
         {% if user_type == "Company" %}
         <a href="{% url 'company_dashboard' %}">Profile</a> |
         {% elif user_type == "Job Seeker" %}
@@ -19,6 +17,14 @@
         <a href="{% url 'user_logout' %}">Logout</a>
     </nav>
     <div class="content">
+        {% if messages %}
+            <ul class="messages">
+                {% for i in messages %}
+                    {% comment %} <li{% if message.tags %} class="{{ i.tags }}"{% endif %}>{{ i }}</li> {% endcomment %}
+                    <li class="{{ i.tags }}">{{ i }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <h2>Welcome to Job Hunt!</h2>
         <p>Hello, {{ user }}! You are logged in as a {{ user_type }}.</p>
         {% if user_type == "Job Seeker" %}

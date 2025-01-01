@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from .forms import UserForm, JobSeekerForm, CompanyForm, JobForm
+from .forms import *
 from .models import *
-from django.db.models import Count
 from random import sample
+from django.db.models import Max
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
 
 # Home View
 def home(request):
@@ -194,3 +197,80 @@ def view_jobs(request):
         'experience_filter': experience_filter
     }
     return render(request, 'jobs/view_jobs.html', context)
+
+
+def apply_for_job(request, job_id):
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "job_seeker"):
+        return redirect('login')  # Ensure only job seekers can apply
+
+    job_seeker_instance = user_instance.job_seeker
+    job_instance = get_object_or_404(jobs, job_id=job_id)
+
+    # Check if the job seeker has already applied
+    if apply.objects.filter(job_id=job_instance, j_username=job_seeker_instance).exists():
+        return render(request, 'jobs/job_application_error.html', {
+            'error': "You have already applied for this job."
+        })
+
+    # Check skill and experience requirements
+    seeker_skills = skills.objects.filter(job_hunter=job_seeker_instance)
+    skill_names = [skill.skill_name.lower() for skill in seeker_skills]
+    max_experience = seeker_skills.aggregate(max_experience=Max('experience'))['max_experience']
+
+    if job_instance.req_skill.lower() not in skill_names or job_instance.req_experience > (max_experience or 0):
+        return render(request, 'jobs/job_application_error.html', {
+            'error': "You do not meet the skill or experience requirements for this job."
+        })
+
+    # Handle CV upload and application creation
+    if request.method == "POST":
+        form = ApplyForm(request.POST, request.FILES)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.job_id = job_instance
+            application.j_username = job_seeker_instance
+            application.save()
+            return redirect('view_jobs')
+    else:
+        form = ApplyForm()
+
+    return render(request, 'jobs/apply_for_job.html', {'form': form, 'job': job_instance})
+
+
+
+def view_applications(request):
+    user_instance = user.objects.get(username=request.session['username'])
+    # Ensure the user is a company
+    if not hasattr(user_instance, 'company'):
+        return redirect('login')
+
+    # Fetch jobs posted by this company
+    company = user_instance.company
+    company_jobs = jobs.objects.filter(c_username=company)
+
+    # Fetch applications for these jobs
+    applications = apply.objects.filter(job_id__in=company_jobs).select_related('j_username', 'job_id')
+
+    context = {
+        'applications': applications,
+    }
+    return render(request, 'jobs/view_applications.html', context)
+
+
+def manage_application(request, application_id, action):
+    user_instance = user.objects.get(username=request.session['username'])
+    if not hasattr(user_instance, "company"):
+        return redirect('login')  # Ensure only companies can access
+
+    application = get_object_or_404(apply, id=application_id)
+    if action == "accept":
+        application.accepted = True
+        application.rejected = False
+        messages.success(request, f"Congratulations! Your application for the job '{application.job_id.title}' has been accepted.")
+    elif action == "reject":
+        application.accepted = False
+        application.rejected = True
+        messages.error(request, f"Unfortunately, your application for the job '{application.job_id.title}' has been rejected.")
+    application.save()
+    return redirect('view_applications')

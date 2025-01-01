@@ -49,7 +49,7 @@
                     <td>${{ job.salary }}</td>
                     <td>{{ job.deadline }}</td>
                     <td>
-                        <a class="actions" href="#">Apply</a>
+                        <a href="{% url 'apply_for_job' job.job_id %}">Apply</a>
                     </td>
                 </tr>
                 {% empty %}

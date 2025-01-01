@@ -1,5 +1,5 @@
 from django import forms
-from .models import user, job_seeker, company, jobs
+from .models import user, job_seeker, company, jobs, apply
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -37,4 +37,12 @@ class JobForm(forms.ModelForm):
         fields = ['req_skill', 'title', 'limit', 'salary', 'description', 'req_experience', 'deadline']
         widgets = {
             'deadline': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class ApplyForm(forms.ModelForm):
+    class Meta:
+        model = apply
+        fields = ['cv']
+        labels = {
+            'cv': 'Upload CV',
         }

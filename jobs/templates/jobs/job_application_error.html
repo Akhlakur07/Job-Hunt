@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Error</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/error.css' %}">
+</head>
+<body>
+    <div class="error-container">
+        <h1>Application Error</h1>
+        <p>{{ error }}</p>
+        <a href="{% url 'view_jobs' %}" class="back">Back to Jobs</a>
+    </div>
+</body>
+</html>

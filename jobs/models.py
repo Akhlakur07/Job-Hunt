@@ -51,4 +51,4 @@ class apply(models.Model):
     j_username = models.ForeignKey(job_seeker, on_delete=models.CASCADE, related_name="applied_jobs")
     accepted = models.BooleanField(default=False)
     rejected = models.BooleanField(default=False)
-    cv = models.TextField()
+    cv = models.FileField(upload_to="cv", blank=True)

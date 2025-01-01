@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #e9ecef;
+    color: #333;
+}
+
+nav {
+    background: #1f3140;
+    background: linear-gradient(to right, #99d6f2, #1f3140);
+    padding: 15px;
+    text-align: center;
+    color: #b4e0e8;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #a5cbdb;
+}
+
+.content {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #1f3140;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-weight: 600;
+}
+
+table th {
+    background: #f4f4f4;
+    color: #1f3140;
+}
+
+table td {
+    background: #fafafa;
+}
+
+table a {
+    color: #1f3140;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+table a:hover {
+    color: #a5cbdb;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.success {
+    color: #48b171;
+}
+
+.fail {
+    color: #dc3545;
+}
+
+.pending {
+    color: #ffc107;
+}
+
+.accept:hover {
+    color: #48b171;
+}
+
+.reject:hover {
+    color: #dc3545;
+}

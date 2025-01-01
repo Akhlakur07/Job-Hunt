@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Applications</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jobs/view_applications.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'company_dashboard' %}">Dashboard</a> |
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </nav>
+
+    <div class="content">
+        <h1>Applications for Your Jobs</h1>
+
+        {% if applications %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Applicant Name</th>
+                    <th>CV</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.job_id.title }}</td>
+                    <td>{{ application.j_username.first_name }} {{ application.j_username.last_name }}</td>
+                    <td>
+                        <a href="{{ application.cv.url }}" target="_blank">View CV</a>
+                    </td>
+                    <td>
+                        {% if application.accepted %}
+                            <p class="success">Accepted</p>
+                        {% elif application.rejected %}
+                            <p class="fail">Rejected</p>
+                        {% else %}
+                            <p class="pending">Pending</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="accept" href="{% url 'manage_application' application.id 'accept' %}">Accept</a> |
+                        <a class="reject" href="{% url 'manage_application' application.id 'reject' %}">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No applications available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -12,4 +12,7 @@ urlpatterns = [
     path('delete-job/<int:job_id>/', views.delete_job, name='delete_job'),
     path('seeker/dashboard/', views.job_seeker_dashboard, name='seeker_dashboard'),
     path('seeker/jobs/', views.view_jobs, name='view_jobs'),
+    path('jobs/apply/<int:job_id>/', views.apply_for_job, name='apply_for_job'),
+    path('company/applications/', views.view_applications, name='view_applications'),
+    path('company/application/<int:application_id>/<str:action>/', views.manage_application, name='manage_application'),
 ]
