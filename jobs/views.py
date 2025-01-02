@@ -5,7 +5,6 @@ from .models import *
 from random import sample
 from django.db.models import Max
 from django.shortcuts import get_object_or_404
-from django.contrib import messages
 
 
 # Home View
@@ -247,15 +246,12 @@ def apply_for_job(request, job_id):
 
 def view_applications(request):
     user_instance = user.objects.get(username=request.session['username'])
-    # Ensure the user is a company
     if not hasattr(user_instance, 'company'):
         return redirect('login')
 
-    # Fetch jobs posted by this company
     company = user_instance.company
     company_jobs = jobs.objects.filter(c_username=company)
 
-    # Fetch applications for these jobs
     applications = apply.objects.filter(job_id__in=company_jobs).select_related('j_username', 'job_id')
 
     context = {
@@ -267,17 +263,15 @@ def view_applications(request):
 def manage_application(request, application_id, action):
     user_instance = user.objects.get(username=request.session['username'])
     if not hasattr(user_instance, "company"):
-        return redirect('login')  # Ensure only companies can access
+        return redirect('login') 
 
     application = get_object_or_404(apply, id=application_id)
     if action == "accept":
         application.accepted = True
         application.rejected = False
-        messages.success(request, f"Congratulations! Your application for the job '{application.job_id.title}' has been accepted.")
     elif action == "reject":
         application.accepted = False
         application.rejected = True
-        messages.error(request, f"Unfortunately, your application for the job '{application.job_id.title}' has been rejected.")
     application.save()
     return redirect('view_applications')
 
