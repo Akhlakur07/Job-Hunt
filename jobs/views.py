@@ -55,12 +55,11 @@ def register_job_seeker(request):
     if request.method == "POST":
         user_form = UserForm(request.POST, request.FILES)
         seeker_form = JobSeekerForm(request.POST)
-        if user_form.is_valid() and seeker_form.is_valid():
-            user_instance = user_form.save()
-            job_seeker_instance = seeker_form.save(commit=False)
-            job_seeker_instance.j_username = user_instance 
-            job_seeker_instance.save()
-            return redirect('login') 
+        user_instance = user_form.save()
+        job_seeker_instance = seeker_form.save(commit=False)
+        job_seeker_instance.j_username = user_instance 
+        job_seeker_instance.save()
+        return redirect('login') 
     else:
         user_form = UserForm()
         seeker_form = JobSeekerForm()
@@ -72,12 +71,11 @@ def register_company(request):
     if request.method == "POST":
         user_form = UserForm(request.POST, request.FILES)
         company_form = CompanyForm(request.POST)
-        if user_form.is_valid() and company_form.is_valid():
-            user_instance = user_form.save()
-            company_instance = company_form.save(commit=False)
-            company_instance.c_username = user_instance 
-            company_instance.save()
-            return redirect('login') 
+        user_instance = user_form.save()
+        company_instance = company_form.save(commit=False)
+        company_instance.c_username = user_instance 
+        company_instance.save()
+        return redirect('login') 
     else:
         user_form = UserForm()
         company_form = CompanyForm()
@@ -117,11 +115,10 @@ def company_dashboard(request):
 
     if request.method == "POST":
         job_form = JobForm(request.POST)
-        if job_form.is_valid():
-            job = job_form.save(commit=False)
-            job.c_username = company_instance  
-            job.save()
-            return redirect('company_dashboard')
+        job = job_form.save(commit=False)
+        job.c_username = company_instance  
+        job.save()
+        return redirect('company_dashboard')
     else:
         job_form = JobForm()
 
@@ -144,9 +141,8 @@ def edit_job(request, job_id):
 
     if request.method == "POST":
         job_form = JobForm(request.POST, instance=job_instance)
-        if job_form.is_valid():
-            job_form.save()
-            return redirect('company_dashboard')
+        job_form.save()
+        return redirect('company_dashboard')
     else:
         job_form = JobForm(instance=job_instance)
 
@@ -231,12 +227,11 @@ def apply_for_job(request, job_id):
 
     if request.method == "POST":
         form = ApplyForm(request.POST, request.FILES)
-        if form.is_valid():
-            application = form.save(commit=False)
-            application.job_id = job_instance
-            application.j_username = job_seeker_instance
-            application.save()
-            return redirect('view_jobs')
+        application = form.save(commit=False)
+        application.job_id = job_instance
+        application.j_username = job_seeker_instance
+        application.save()
+        return redirect('view_jobs')
     else:
         form = ApplyForm()
 

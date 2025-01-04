@@ -26,7 +26,6 @@ class CompanyForm(forms.ModelForm):
         model = company
         fields = ['company_name', 'company_type', 'establishment_year']
     
-    # Modify establishment_year field to be a DateField
     establishment_year = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date', 'placeholder': 'Select Year'})
     )
