@@ -1,6 +1,26 @@
 # Job-Hunt
+Job Hunt is a web-based platform developed using `Django`, `HTML`, and `CSS` to streamline the recruitment process by connecting job seekers with potential employers.
 
-Create database in the models.py file
+## Features
+
+- Two types of user authentication:
+    - Users can register as Job Seekers or Company.
+- Job Seeker Portal:
+    - Users can create profiles, browse job listings, and apply for suitable roles.
+    - Job seekers can filter job postings based on salary, required experience, and skill.
+- Employer Portal:
+    - Employers can post job vacancies, including essential details like skills required, salary, experience, description, and application deadlines.
+    - Employers can manage applications by accepting or declining them as needed.
+- CRUD Functionality:
+    - Both employers and job seekers have access to full Create, Read, Update, and Delete (CRUD) operations to manage profiles, jobs, and applications efficiently.
+
+## Tech Stack
+
+- **Frontend**: HTML, CSS
+- **Backend**: Django
+- **Database**: SQlite
+
+## Create database in the models.py file
 ```
 from django.db import models
 
@@ -81,3 +101,8 @@ job2 = jobs.objects.create(c_username=company1, req_skill="Strategic Thinking", 
 apply.objects.create(job_id=job1, j_username=job_seeker1, accepted=False, rejected=False, cv="Highly experienced ninja specialized in combat and reconnaissance.")
 apply.objects.create(job_id=job2, j_username=job_seeker2, accepted=True, rejected=False, cv="Aspiring Hokage with unmatched determination and drive.")
 ```
+
+
+## Database EER Diagram
+
+<img src="/doc/images/job_eer.png" alt="eer_diagram"/>
